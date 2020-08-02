@@ -13,6 +13,8 @@ class User < ApplicationRecord
   attachment :profile_image
   validates :name, presence: true, length: {minimum: 2, maximum: 20}
   validates :introduction, length: {maximum: 50}
+  geocoded_by :address_street
+  after_validation :geocode
 
   def following?(other_user)
     following_relationships.find_by(following_id: other_user.id)
@@ -38,6 +40,17 @@ class User < ApplicationRecord
     else
       @user = User.all
     end
+  end
+
+  include JpPrefecture
+  jp_prefecture :prefecture_code
+
+  def prefecture_name
+    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+
+  def prefecture_name=(prefecture_name)
+    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
 
   protected
