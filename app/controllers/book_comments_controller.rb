@@ -9,12 +9,10 @@ class BookCommentsController < ApplicationController
 		if @book_comment.save
 			flash[:success] = "Comment was successfully created"
 		end
-		redirect_to request.referer
 	end
 
 	def destroy
 		BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
-		redirect_to request.referer
 	end
 
 	private
