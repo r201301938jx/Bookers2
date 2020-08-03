@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   end
   resources :relationships, only: [:create, :destroy]
   get 'search' => 'searches#search'
+  get 'chat/:id' => 'chat#show', as: 'chat'
+  resources :chats, only: [:create]
 end

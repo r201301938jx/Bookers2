@@ -69,5 +69,5 @@ Rails.application.configure do
     password: ENV['GMAIL_PASSWORD'],
     authentication: 'plain',
   }
-  
+
 end
