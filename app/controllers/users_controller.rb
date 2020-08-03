@@ -7,15 +7,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def create
-    if @user.save
-      ThanksMailer.send_confirm_to_user(@user).deliver
-      redirect_to @user
-    else
-      render 'new'
-    end
-  end
-
   def show
   	@user = User.find(params[:id])
   	@books = @user.books

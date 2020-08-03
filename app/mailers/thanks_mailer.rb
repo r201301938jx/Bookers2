@@ -5,7 +5,7 @@ class ThanksMailer < AcitonMailer::Base
         @user = user
         mail(
             subject: "会員登録が完了しました。", #メールのタイトル
-            to: 'dee877ced7k30@icloud.com' #宛先
+            to: @user.email #宛先
         ) do |format|
             format.text
         end
